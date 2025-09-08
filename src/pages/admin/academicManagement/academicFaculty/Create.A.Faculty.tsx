@@ -1,11 +1,62 @@
+import { Button, Col, Row } from "antd";
+import { type FieldValues, type SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
+import UniversityForm from "../../../../components/form/UniversityForm";
+import UniversitySelect from "../../../../components/form/UniversitySelect";
+import { useAddAcademicFacultyMutation } from "../../../../redux/features/admin/AcademicManagementApi";
+import { type APIError } from "../academicSemester/academicSemester.constant";
+import { academicFacultyName } from "./academicFaculty.type";
 
+const CreateSemester = () => {
+  const [addAcademicFaculty] = useAddAcademicFacultyMutation();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const facultyName = academicFacultyName.find(
+      (opt) => opt.value === data.name
+    )?.label;
+    const facultyData = {
+      name: facultyName ?? "",
+    };
 
-const CreateAcademicFaculty = () => {
+    try {
+      const res = await addAcademicFaculty(facultyData);
+      if (res.error) {
+        const errData = (res.error as APIError)?.data as APIError;
+        toast.error(errData.message || "Something went wrong");
+      } else {
+        toast.success("Academic Faculty Data Created Successfully");
+      }
+      console.log("Final Academic Faculty Data:", res);
+    } catch (error) {
+      toast.error("Error occured in generating academic faculty data");
+    }
+  };
+
+  const defaultValues = {
+    name: "01",
+  };
+
   return (
-    <div>
-      <h1>Create A Faculty</h1>
-    </div>
-  )
-}
+    <Row justify="center" align="middle">
+      <Col span={8}>
+        <UniversityForm<FieldValues>
+          onSubmit={onSubmit}
+          defaultValues={defaultValues}
+        >
+          <UniversitySelect<FieldValues>
+            label="Academic Faculty Name"
+            name="name"
+            options={academicFacultyName}
+            rules={{ required: "Faculty name is required" }}
+          />
+          <Row justify="end" style={{ marginTop: 16 }}>
+            <Button htmlType="submit" size="large" type="primary">
+              Submit
+            </Button>
+          </Row>
+        </UniversityForm>
+      </Col>
+    </Row>
+  );
+};
 
-export default CreateAcademicFaculty
+export default CreateSemester;

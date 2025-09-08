@@ -1,4 +1,4 @@
-import { Table, type TableColumnsType, type TableProps } from "antd";
+import { Button, Table, type TableColumnsType, type TableProps } from "antd";
 import { useState } from "react";
 import { useGetAllAcademicSemesterQuery } from "../../../../redux/features/admin/AcademicManagementApi";
 import type {
@@ -41,14 +41,6 @@ const AcademicSemester = () => {
       ],
     },
     {
-      title: "Start Month",
-      dataIndex: "startMonth",
-    },
-    {
-      title: "End Month",
-      dataIndex: "endMonth",
-    },
-    {
       title: "Academic Year",
       dataIndex: "academicYear",
       filters: [
@@ -65,6 +57,21 @@ const AcademicSemester = () => {
           value: "2027",
         },
       ],
+    },
+    {
+      title: "Start Month",
+      dataIndex: "startMonth",
+    },
+    {
+      title: "End Month",
+      dataIndex: "endMonth",
+    },
+    {
+      title: "Action",
+      dataIndex: "endMonth",
+      render: () => {
+        return <Button>Update</Button>;
+      },
     },
   ];
 
@@ -91,14 +98,19 @@ const AcademicSemester = () => {
   };
 
   return (
-    <Table<TAcademicSemester>
-      rowKey="_id"
-      loading={isFetching}
-      columns={columns}
-      dataSource={tableData}
-      onChange={onChange}
-      showSorterTooltip={{ target: "sorter-icon" }}
-    />
+    <>
+      <div className="text-2xl font-bold text-center">
+        Academic Semester Intro
+      </div>
+      <Table<TAcademicSemester>
+        rowKey="_id"
+        loading={isFetching}
+        columns={columns}
+        dataSource={tableData}
+        onChange={onChange}
+        showSorterTooltip={{ target: "sorter-icon" }}
+      />
+    </>
   );
 };
 

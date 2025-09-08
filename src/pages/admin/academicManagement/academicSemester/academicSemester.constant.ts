@@ -1,3 +1,5 @@
+import type { TAcademicFaculty } from "../academicFaculty/academicFaculty.type";
+
 // Semester options
 export const nameOptions = [
   { value: "01", label: "Autumn" },
@@ -39,7 +41,11 @@ export type TMete = {
 
 export type TAcademicSemesterResponse = {
   data: TAcademicSemester[];
-  meta: TMete;
+  meta?: TMete;
+};
+export type TAcademicFacultyResponse = {
+  data: TAcademicFaculty[];
+  meta?: TMete;
 };
 
 export type APIError = {
