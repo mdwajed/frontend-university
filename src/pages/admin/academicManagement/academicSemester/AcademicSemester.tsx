@@ -1,10 +1,8 @@
 import { Button, Table, type TableColumnsType, type TableProps } from "antd";
 import { useState } from "react";
 import { useGetAllAcademicSemesterQuery } from "../../../../redux/features/admin/AcademicManagementApi";
-import type {
-  TAcademicSemester,
-  TQueryParam,
-} from "./academicSemester.constant";
+import type { TQueryParam } from "../academicManagement.type";
+import type { TAcademicSemester } from "./academicSemester.constant";
 
 const AcademicSemester = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);

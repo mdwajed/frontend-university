@@ -1,6 +1,10 @@
-import type { TAcademicFaculty } from "../../../pages/admin/academicManagement/academicFaculty/academicFaculty.type";
 import type {
-  FilterArg,
+  TAcademicDepaetment,
+  TAcademicDepartmentResponse,
+} from "../../../pages/admin/academicManagement/academicDepartment/AcademicDepartment.type";
+import type { TAcademicFaculty } from "../../../pages/admin/academicManagement/academicFaculty/academicFaculty.type";
+import type { FilterArg } from "../../../pages/admin/academicManagement/academicManagement.type";
+import type {
   TAcademicSemester,
   TAcademicSemesterResponse,
 } from "../../../pages/admin/academicManagement/academicSemester/academicSemester.constant";
@@ -47,18 +51,39 @@ const AcademicManagementApi = baseApi.injectEndpoints({
       }),
     }),
     getAllAcademicFaculty: builder.query({
-      query: () => ({
-        // const params = new URLSearchParams();
-        // if (args) {
-        //   args.forEach((filter) => {
-        //     params.append(filter.name, filter.value);
-        //   });
-        // }
-        // return {
+      query: (body) => ({
         url: "/academic-faculties",
         method: "GET",
-        // params: params,
+        body,
       }),
+    }),
+    addAcademicDepartment: builder.mutation<
+      TAcademicDepaetment,
+      Partial<TAcademicDepaetment>
+    >({
+      query: (data) => ({
+        url: "/academic-departments/create-department",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getAllAcademicDepartment: builder.query<
+      TAcademicDepartmentResponse,
+      FilterArg
+    >({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((filter) => {
+            params.append(filter.name, filter.value);
+          });
+        }
+        return {
+          url: "/academic-departments",
+          method: "GET",
+          params: params,
+        };
+      },
     }),
   }),
 });
@@ -68,4 +93,6 @@ export const {
   useAddAcademicSemesterMutation,
   useAddAcademicFacultyMutation,
   useGetAllAcademicFacultyQuery,
+  useGetAllAcademicDepartmentQuery,
+  useAddAcademicDepartmentMutation,
 } = AcademicManagementApi;

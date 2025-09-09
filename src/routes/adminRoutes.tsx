@@ -4,10 +4,10 @@ import AcademicFaculty from "../pages/admin/academicManagement/academicFaculty/A
 import CreateAcademicFaculty from "../pages/admin/academicManagement/academicFaculty/Create.A.Faculty";
 import AcademicSemester from "../pages/admin/academicManagement/academicSemester/AcademicSemester";
 import CreateSemester from "../pages/admin/academicManagement/academicSemester/Create.A.semester";
-import AdminDashboard from "../pages/admin/AdminDashboard";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/CreateFaculty";
-import CreateStudent from "../pages/admin/CreateStudent";
+import AdminDashboard from "../pages/admin/userManagement/AdminDashboard";
+import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
+import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
+import CreateStudent from "../pages/admin/userManagement/CreateStudent";
 
 export const adminPaths = [
   {

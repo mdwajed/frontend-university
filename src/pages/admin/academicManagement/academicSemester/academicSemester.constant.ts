@@ -1,4 +1,4 @@
-import type { TAcademicFaculty } from "../academicFaculty/academicFaculty.type";
+import type { TMeta } from "../academicManagement.type";
 
 // Semester options
 export const nameOptions = [
@@ -33,31 +33,7 @@ export type TAcademicSemester = {
   updatedAt?: string;
 };
 
-export type TMete = {
-  total: number;
-  limit: number;
-  page: number;
-};
-
 export type TAcademicSemesterResponse = {
   data: TAcademicSemester[];
-  meta?: TMete;
-};
-export type TAcademicFacultyResponse = {
-  data: TAcademicFaculty[];
-  meta?: TMete;
-};
-
-export type APIError = {
-  data?: unknown;
-  message: string;
-  success?: boolean;
-  errorMessages?: { path: string; message: string }[];
-};
-
-export type FilterArg = { name: string; value: string }[];
-
-export type TQueryParam = {
-  name: string;
-  value: string;
+  meta?: TMeta;
 };

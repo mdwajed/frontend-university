@@ -1,3 +1,5 @@
+import type { TMeta } from "../academicManagement.type";
+
 // Academic faculty name options
 export const academicFacultyName = [
   { value: "01", label: "Faculty of Engineering" },
@@ -8,7 +10,11 @@ export const academicFacultyName = [
 ];
 
 export type TAcademicFaculty = {
-  data: any;
   _id: string;
   name: string;
+};
+
+export type TAcademicFacultyResponse = {
+  data: TAcademicFaculty[];
+  meta?: TMeta;
 };

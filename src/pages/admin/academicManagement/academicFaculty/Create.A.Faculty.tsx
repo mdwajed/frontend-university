@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
 import UniversitySelect from "../../../../components/form/UniversitySelect";
 import { useAddAcademicFacultyMutation } from "../../../../redux/features/admin/AcademicManagementApi";
-import { type APIError } from "../academicSemester/academicSemester.constant";
+import type { APIError } from "../academicManagement.type";
 import { academicFacultyName } from "./academicFaculty.type";
 
 const CreateSemester = () => {
@@ -18,19 +18,15 @@ const CreateSemester = () => {
     };
 
     try {
-      const res = await addAcademicFaculty(facultyData);
-      if (res.error) {
-        const errData = (res.error as APIError)?.data as APIError;
-        toast.error(errData.message || "Something went wrong");
-      } else {
-        toast.success("Academic Faculty Data Created Successfully");
-      }
-      console.log("Final Academic Faculty Data:", res);
+      await addAcademicFaculty(facultyData);
+      toast.success("Academic Faculty Data Created Successfully");
     } catch (error) {
-      toast.error("Error occured in generating academic faculty data");
+      const errData = (error as APIError)?.data as APIError;
+      toast.error(
+        errData.message || "Error occured in generating academic faculty data"
+      );
     }
   };
-
   const defaultValues = {
     name: "01",
   };

@@ -20,7 +20,6 @@ const UniversityInput = <T extends FieldValues>({
   const { control } = useFormContext<T>();
   return (
     <div style={{ marginBottom: "20px" }}>
-      {/* {label && <label htmlFor={name}>{label}</label>} */}
       <Controller
         control={control}
         name={name}

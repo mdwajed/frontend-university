@@ -4,11 +4,8 @@ import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
 import UniversitySelect from "../../../../components/form/UniversitySelect";
 import { useAddAcademicSemesterMutation } from "../../../../redux/features/admin/AcademicManagementApi";
-import {
-  monthOptions,
-  nameOptions,
-  type APIError,
-} from "./academicSemester.constant";
+import type { APIError } from "../academicManagement.type";
+import { monthOptions, nameOptions } from "./academicSemester.constant";
 import EndMonthSelect from "./EndMonthSelect";
 
 // Generate years dynamically
@@ -51,7 +48,7 @@ const CreateSemester = () => {
       toast.error("Error occured in generating semester data");
     }
   };
-
+  // (res.error as APIError)?.data as APIError;
   const defaultValues = {
     name: "01",
     academicYear: String(currentYear),
