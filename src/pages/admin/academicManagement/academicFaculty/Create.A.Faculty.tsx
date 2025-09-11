@@ -2,23 +2,19 @@ import { Button, Col, Row } from "antd";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
-import UniversitySelect from "../../../../components/form/UniversitySelect";
+import UniversityInput from "../../../../components/form/UniversityInput";
 import { useAddAcademicFacultyMutation } from "../../../../redux/features/admin/AcademicManagementApi";
 import type { APIError } from "../academicManagement.type";
-import { academicFacultyName } from "./academicFaculty.type";
 
 const CreateSemester = () => {
   const [addAcademicFaculty] = useAddAcademicFacultyMutation();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const facultyName = academicFacultyName.find(
-      (opt) => opt.value === data.name
-    )?.label;
     const facultyData = {
-      name: facultyName ?? "",
+      name: data.name,
     };
 
     try {
-      await addAcademicFaculty(facultyData);
+      await addAcademicFaculty(facultyData).unwrap();
       toast.success("Academic Faculty Data Created Successfully");
     } catch (error) {
       const errData = (error as APIError)?.data as APIError;
@@ -28,7 +24,7 @@ const CreateSemester = () => {
     }
   };
   const defaultValues = {
-    name: "01",
+    name: "Faculty of Engineering",
   };
 
   return (
@@ -38,11 +34,9 @@ const CreateSemester = () => {
           onSubmit={onSubmit}
           defaultValues={defaultValues}
         >
-          <UniversitySelect<FieldValues>
+          <UniversityInput<FieldValues>
             label="Academic Faculty Name"
             name="name"
-            options={academicFacultyName}
-            rules={{ required: "Faculty name is required" }}
           />
           <Row justify="end" style={{ marginTop: 16 }}>
             <Button htmlType="submit" size="large" type="primary">

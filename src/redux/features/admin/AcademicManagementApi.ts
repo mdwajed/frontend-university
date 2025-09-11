@@ -12,23 +12,24 @@ import { baseApi } from "../../api/baseApi";
 
 const AcademicManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllAcademicSemester: builder.query<TAcademicSemesterResponse, FilterArg>(
-      {
-        query: (args) => {
-          const params = new URLSearchParams();
-          if (args) {
-            args.forEach((filter) => {
-              params.append(filter.name, filter.value);
-            });
-          }
-          return {
-            url: "/academic-semesters",
-            method: "GET",
-            params: params,
-          };
-        },
-      }
-    ),
+    getAllAcademicSemester: builder.query<
+      TAcademicSemesterResponse,
+      FilterArg | void
+    >({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((filter) => {
+            params.append(filter.name, filter.value);
+          });
+        }
+        return {
+          url: "/academic-semesters",
+          method: "GET",
+          params: params,
+        };
+      },
+    }),
 
     addAcademicSemester: builder.mutation<
       TAcademicSemester,
@@ -69,7 +70,7 @@ const AcademicManagementApi = baseApi.injectEndpoints({
     }),
     getAllAcademicDepartment: builder.query<
       TAcademicDepartmentResponse,
-      FilterArg
+      FilterArg | void
     >({
       query: (args) => {
         const params = new URLSearchParams();

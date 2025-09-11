@@ -21,9 +21,15 @@ const UniversityForm = <T extends FieldValues>({
   defaultValues,
 }: UniversityFormProps<T>) => {
   const methods: UseFormReturn<T> = useForm<T>({ defaultValues });
+
+  const submit: SubmitHandler<T> = (data) => {
+    onSubmit(data);
+    methods.reset();
+  };
+
   return (
     <FormProvider {...methods}>
-      <Form layout="vertical" onFinish={methods.handleSubmit(onSubmit)}>
+      <Form layout="vertical" onFinish={methods.handleSubmit(submit)}>
         {children}
       </Form>
     </FormProvider>

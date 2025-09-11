@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
 import UniversityInput from "../../../../components/form/UniversityInput";
 import UniversitySelect from "../../../../components/form/UniversitySelect";
+
 import {
   useAddAcademicDepartmentMutation,
   useGetAllAcademicFacultyQuery,

@@ -29,6 +29,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@ant-design/icons", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:6.0.0"],\
+          ["@ant-design/v5-patch-for-react-19", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:1.0.3"],\
           ["@eslint/js", "npm:9.35.0"],\
           ["@reduxjs/toolkit", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:2.8.2"],\
           ["@tailwindcss/vite", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:4.1.12"],\
@@ -261,6 +262,36 @@ const RAW_RUNTIME_STATE =
         ],\
         "packagePeers": [\
           "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@ant-design/v5-patch-for-react-19", [\
+      ["npm:1.0.3", {\
+        "packageLocation": "../../../Users/Administrator/AppData/Local/Yarn/Berry/cache/@ant-design-v5-patch-for-react-19-npm-1.0.3-378f6bebae-10c0.zip/node_modules/@ant-design/v5-patch-for-react-19/",\
+        "packageDependencies": [\
+          ["@ant-design/v5-patch-for-react-19", "npm:1.0.3"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:1.0.3", {\
+        "packageLocation": "./.yarn/__virtual__/@ant-design-v5-patch-for-react-19-virtual-d4a21d76e8/4/Users/Administrator/AppData/Local/Yarn/Berry/cache/@ant-design-v5-patch-for-react-19-npm-1.0.3-378f6bebae-10c0.zip/node_modules/@ant-design/v5-patch-for-react-19/",\
+        "packageDependencies": [\
+          ["@ant-design/v5-patch-for-react-19", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:1.0.3"],\
+          ["@types/antd", null],\
+          ["@types/react", "npm:19.1.11"],\
+          ["@types/react-dom", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:19.1.8"],\
+          ["antd", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:5.27.1"],\
+          ["react", "npm:19.1.1"],\
+          ["react-dom", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:19.1.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/antd",\
+          "@types/react-dom",\
+          "@types/react",\
+          "antd",\
+          "react-dom",\
           "react"\
         ],\
         "linkType": "HARD"\
@@ -7480,6 +7511,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@ant-design/icons", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:6.0.0"],\
+          ["@ant-design/v5-patch-for-react-19", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:1.0.3"],\
           ["@eslint/js", "npm:9.35.0"],\
           ["@reduxjs/toolkit", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:2.8.2"],\
           ["@tailwindcss/vite", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:4.1.12"],\
