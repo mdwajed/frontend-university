@@ -19,6 +19,7 @@ export type LocalGuardian = {
 };
 
 export type TStudent = {
+  id: string;
   _id: string;
   name: UserName;
   email: string;
@@ -80,6 +81,7 @@ export type TStudentApiResponse = {
 };
 
 export type TStudentRow = {
+  id: string;
   name: string;
   admissionSemester: string;
   academicDepartment: string;

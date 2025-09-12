@@ -1,23 +1,37 @@
-import { Table, type TableColumnsType, type TableProps } from "antd";
+import {
+  Button,
+  Pagination,
+  Table,
+  type TableColumnsType,
+  type TableProps,
+} from "antd";
 import { useState } from "react";
 import { useGetAllStudentQuery } from "../../../../redux/features/admin/userManagementApi";
 import type { TQueryParam } from "../../academicManagement/academicManagement.type";
 import type { TStudentRow } from "./student.type";
 
 const StudentIntro = () => {
+  const [page, setPage] = useState<number>();
   const [params, setParams] = useState<TQueryParam[]>([]);
-  const { data: studentData, isFetching } = useGetAllStudentQuery(params);
+  const { data: studentData, isFetching } = useGetAllStudentQuery([
+    { name: "limit", value: "5" },
+    { name: "page", value: String(page) },
+    ...params,
+  ]);
 
+  const meteData = studentData?.meta;
   const tableData: TStudentRow[] =
     studentData?.data?.map(
       ({
         _id,
+        id,
         name,
         profileImage,
         academicDepartment,
         admissionSemester,
         academicFaculty,
       }) => ({
+        id,
         _id,
         name: `${name?.firstName} ${name?.middleName || ""} ${
           name?.lastName || ""
@@ -38,10 +52,19 @@ const StudentIntro = () => {
       }));
 
   console.log("StudentData:", tableData);
+
   const columns: TableColumnsType<TStudentRow> = [
     {
       title: "Name",
       dataIndex: "name",
+      filters: getUniqueValues("name"),
+      onFilter: (value, record) => record.name === value,
+    },
+    {
+      title: "Roll Number",
+      dataIndex: "id",
+      filters: getUniqueValues("id"),
+      onFilter: (value, record) => record.id === value,
     },
     {
       title: "Admission Semester",
@@ -52,20 +75,20 @@ const StudentIntro = () => {
     {
       title: "Profile Image",
       dataIndex: "profileImage",
-      render: (url) =>
-        url ? <img src={url} alt="profile" width={50} /> : "N/A",
+      render: (url) => (url ? <img src={url} alt="Img" width={50} /> : "N/A"),
     },
     {
-      title: "Academic Department",
-      dataIndex: "academicDepartment",
-      filters: getUniqueValues("academicDepartment"),
-      onFilter: (value, record) => record.academicDepartment === value,
-    },
-    {
-      title: "Academic Faculty",
-      dataIndex: "academicFaculty",
-      filters: getUniqueValues("academicFaculty"),
-      onFilter: (value, record) => record.academicFaculty === value,
+      title: "Action",
+      dataIndex: "endMonth",
+      render: () => {
+        return (
+          <div>
+            <Button className="">Create</Button>
+            <Button className="">Update</Button>
+            <Button className="">Delete</Button>
+          </div>
+        );
+      },
     },
   ];
 
@@ -83,7 +106,6 @@ const StudentIntro = () => {
             value: String(v),
           })) || []
       );
-
       setParams(queryParams);
     }
     console.log("params", pagination, filters, sorter, extra);
@@ -99,6 +121,14 @@ const StudentIntro = () => {
         dataSource={tableData}
         onChange={onChange}
         showSorterTooltip={{ target: "sorter-icon" }}
+        pagination={false}
+      />
+      <Pagination
+        style={{ marginTop: "12px" }}
+        pageSize={meteData?.limit}
+        total={meteData?.total}
+        current={page}
+        onChange={(value) => setPage(value)}
       />
     </>
   );
