@@ -19,14 +19,25 @@ export type LocalGuardian = {
 };
 
 export type TStudent = {
+  data: any;
   id: string;
   _id: string;
+  message: any;
   name: UserName;
   email: string;
   admissionSemester: { name: string };
   academicDepartment: { name: string };
   academicFaculty: { name: string };
   profileImage?: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  gender: string;
+  dateOfBirth?: string;
+  bloodGroup: string;
+  permanentAddress: string;
+  presentAddress: string;
+  guardian: Guardian;
+  localGuardian: LocalGuardian;
   student: {
     academicFaculty: any;
     _id?: string;
@@ -47,30 +58,6 @@ export type TStudent = {
   };
 };
 
-// export type TStudent = {
-//   //   student: any;
-//   _id: string;
-//   name: {
-//     firstName: string;
-//     middleName?: string | null;
-//     lastName?: string | null;
-//   };
-//   email?: string;
-//   gender?: string;
-//   dateOfBirth?: string;
-//   contactNo?: string;
-//   emergencyContactNo?: string;
-//   bloodGroup?: string;
-//   permanentAddress?: string;
-//   profileImage?: string;
-//   presentAddress?: string;
-//   guardian?: Guardian;
-//   localGuardian?: LocalGuardian;
-//   admissionSemester?: { _id?: string | undefined; name: string };
-//   academicDepartment?: { _id?: string; name: string };
-//   academicFaculty?: { _id?: string; name: string };
-// };
-
 export type TStudentApiResponse = {
   data: TStudent[];
   meta?: {
@@ -81,7 +68,18 @@ export type TStudentApiResponse = {
 };
 
 export type TStudentRow = {
+  _id: string;
   id: string;
+  email?: string;
+  gender?: string;
+  dateOfBirth?: string;
+  contactNo?: string;
+  emergencyContactNo?: string;
+  bloodGroup?: string;
+  permanentAddress?: string;
+  presentAddress?: string;
+  guardian: string;
+  localGuardian: string;
   name: string;
   admissionSemester: string;
   academicDepartment: string;

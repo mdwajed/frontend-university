@@ -5,12 +5,14 @@ export type TMeta = {
 };
 
 export type APIError = {
+  errorMessages: any;
   status?: string;
   data?: {
     message?: string;
     success?: string;
     errorMessages?: { path: string; message: string }[];
   };
+
   message?: string;
   success?: boolean;
 };

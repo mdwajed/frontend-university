@@ -6,9 +6,12 @@ import AcademicSemester from "../pages/admin/academicManagement/academicSemester
 import CreateSemester from "../pages/admin/academicManagement/academicSemester/Create.A.semester";
 import AdminDashboard from "../pages/admin/userManagement/AdminDashboard";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
-import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
+import CreateFaculty from "../pages/admin/userManagement/faculty/CreateFaculty";
+import FacultyIntro from "../pages/admin/userManagement/faculty/FacultyIntro";
+import FacultyIntroModal from "../pages/admin/userManagement/faculty/FacultyIntroModel";
 import CreateStudent from "../pages/admin/userManagement/student/CreateStudent";
 import StudentIntro from "../pages/admin/userManagement/student/StudentIntro";
+import StudentIntroModal from "../pages/admin/userManagement/student/StudentIntroModal";
 
 export const adminPaths = [
   {
@@ -37,7 +40,7 @@ export const adminPaths = [
       },
       {
         name: "Create A. Faculty",
-        path: "create-faculty",
+        path: "create-academic-faculty",
         element: <CreateAcademicFaculty />,
       },
       {
@@ -75,46 +78,33 @@ export const adminPaths = [
         path: "student-intro",
         element: <StudentIntro />,
       },
+      {
+        name: "Faculty Intro",
+        path: "faculty-intro",
+        element: <FacultyIntro />,
+      },
+      {
+        path: "student-intro/:studentId",
+        element: (
+          <StudentIntroModal
+            open={false}
+            onClose={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        ),
+      },
+      {
+        path: "faculty-intro/:facultyId",
+        element: (
+          <FacultyIntroModal
+            open={false}
+            onClose={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        ),
+      },
     ],
   },
 ];
-
-// export const adminSidebarItem = adminPaths.reduce(
-//   (acc: ItemType<MenuItemType>[], item) => {
-//     if (item.path && item.name) {
-//       acc.push({
-//         key: item.name,
-//         label: <NavLink to={`/admin/${item.path}`}>{item.name}</NavLink>,
-//       });
-//     }
-//     if (item.children) {
-//       acc.push({
-//         key: item.name,
-//         label: item.name,
-//         children: item.children.map((child) => ({
-//           key: child.name,
-//           label: <NavLink to={`/admin/${child.path}`}>{child.name}</NavLink>,
-//         })),
-//       });
-//     }
-//     return acc;
-//   },
-//   []
-// );
-// export const adminRoutes = adminPaths.reduce((acc: TRoutes[], item) => {
-//   if (item.path && item.element) {
-//     acc.push({
-//       path: item.path,
-//       element: item.element,
-//     });
-//   }
-//   if (item.children) {
-//     item.children.forEach((child) => {
-//       acc.push({
-//         path: child.path,
-//         element: child.element,
-//       });
-//     });
-//   }
-//   return acc;
-// }, []);

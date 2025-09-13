@@ -5,7 +5,7 @@ export const BloodGroupOptions = BloodGroups.map((item) => ({
   value: item,
 }));
 
-export const Gender = ["Male", "Female"];
+export const Gender = ["male", "female"];
 
 export const GenderOptions = Gender.map((item) => ({
   label: item,

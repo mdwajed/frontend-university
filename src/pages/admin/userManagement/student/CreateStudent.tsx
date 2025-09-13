@@ -1,4 +1,5 @@
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, message, Row } from "antd";
+import { useEffect } from "react";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import UniversityDatePicker from "../../../../components/form/UniversityDatePicker";
 import UniversityForm from "../../../../components/form/UniversityForm";
@@ -26,7 +27,6 @@ const studentDefaultValue = {
     emergencyContactNo: "01711223344",
     bloodGroup: "O-",
     permanentAddress: "Rajshahi, Bangladesh",
-    // profileImage: "https://profileImage.jpg",
     presentAddress: "Motihar, Rajshahi",
     guardian: {
       fatherName: "Shah Alam",
@@ -49,9 +49,28 @@ const studentDefaultValue = {
 };
 
 const CreateStudent = () => {
-  const [addStudent, { data, error }] = useAddStudentMutation();
+  const [addStudent, { data, error, isSuccess, isError, isLoading }] =
+    useAddStudentMutation();
 
   console.log({ data, error });
+
+  //  Setup Ant Design message API
+  const [messageApi, contextHolder] = message.useMessage();
+
+  // Show toast when mutation result changes
+  useEffect(() => {
+    if (isSuccess && data) {
+      messageApi.success(data?.message || "🎉 Student created successfully!");
+    }
+    if (isError && error) {
+      let errorMessage = "❌ Failed to create student.";
+      if ("data" in error && (error as any).data.errMessages) {
+        errorMessage = (error as any).data.errMessages[0].message;
+      }
+      messageApi.error(errorMessage);
+    }
+  }, [isSuccess, isError, data, error]);
+
   // query semesters
   const {
     data: semesterData,
@@ -59,13 +78,13 @@ const CreateStudent = () => {
     error: semesterError,
   } = useGetAllAcademicSemesterQuery();
 
-  // query departments
   const academicSemesterOptions =
     semesterData?.data?.map((item) => ({
       label: ` ${item.name} ${item.academicYear}`,
       value: item._id,
     })) ?? [];
 
+  // query departments
   const {
     data: departmentData,
     isFetching: isDepartmentFetching,
@@ -79,13 +98,14 @@ const CreateStudent = () => {
     })) ?? [];
 
   const onSubmit: SubmitHandler<TStudent> = (data) => {
-    console.log(data);
+    console.log({ data });
     const studentData = {
       password: "student123",
       student: data.student,
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(studentData));
+
     // Append file if exists
     if (data.student.profileImage) {
       formData.append("file", data.student.profileImage);
@@ -93,8 +113,10 @@ const CreateStudent = () => {
     addStudent(formData);
     console.log([...formData.entries()]);
   };
+
   return (
     <>
+      {contextHolder}
       <div className="text-2xl font-bold text-center">Student Intro Form</div>
       {semesterError && (
         <div style={{ color: "red" }}>Failed to load semesters.</div>
@@ -285,7 +307,12 @@ const CreateStudent = () => {
             </Row>
             {/* Submit */}
             <Row justify="center" style={{ marginTop: 24 }}>
-              <Button htmlType="submit" size="large" type="primary">
+              <Button
+                htmlType="submit"
+                size="large"
+                type="primary"
+                loading={isLoading}
+              >
                 Submit
               </Button>
             </Row>

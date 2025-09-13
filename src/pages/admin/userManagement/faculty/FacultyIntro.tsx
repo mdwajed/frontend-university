@@ -6,36 +6,35 @@ import {
   type TableProps,
 } from "antd";
 import { useState } from "react";
-import { useGetAllStudentQuery } from "../../../../redux/features/admin/userManagementApi";
+import { useGetAllFacultyQuery } from "../../../../redux/features/admin/userManagementApi";
 import type { TQueryParam } from "../../academicManagement/academicManagement.type";
-import type { TStudentRow } from "./student.type";
-import StudentIntroModal from "./StudentIntroModal";
+import type { TFacultyRow } from "./faculty.type";
+import FacultyIntroModal from "./FacultyIntroModel";
 
-const StudentIntro = () => {
+const FacultyIntro = () => {
   const [page, setPage] = useState<number>(1);
   const [params, setParams] = useState<TQueryParam[]>([]);
 
   // modal state
   const [open, setOpen] = useState(false);
-  const [student, setStudent] = useState<TStudentRow>();
+  const [faculty, setFaculty] = useState<TFacultyRow>();
 
-  const { data: studentData, isFetching } = useGetAllStudentQuery([
+  const { data: facultyData, isFetching } = useGetAllFacultyQuery([
     { name: "limit", value: "5" },
     { name: "page", value: String(page) },
     ...params,
   ]);
 
-  const meteData = studentData?.meta;
-  const tableData: TStudentRow[] =
-    studentData?.data?.map(
+  const meteData = facultyData?.meta;
+  const tableData: TFacultyRow[] =
+    facultyData?.data?.map(
       ({
         _id,
         id,
         name,
+        designation,
         profileImage,
         academicDepartment,
-        admissionSemester,
-        academicFaculty,
         email,
         contactNo,
         emergencyContactNo,
@@ -44,32 +43,27 @@ const StudentIntro = () => {
         bloodGroup,
         permanentAddress,
         presentAddress,
-        guardian,
-        localGuardian,
       }) => ({
         email,
         id,
         _id,
         contactNo,
         emergencyContactNo,
+        designation,
         gender,
         dateOfBirth,
         bloodGroup,
         permanentAddress,
         presentAddress,
-        guardian: `${guardian.fatherName}`,
-        localGuardian: `${localGuardian.name}`,
         name: `${name?.firstName} ${name?.middleName || ""} ${
           name?.lastName || ""
         }`.trim(),
         profileImage: profileImage || "",
-        admissionSemester: admissionSemester?.name || "",
         academicDepartment: academicDepartment?.name || "",
-        academicFaculty: academicFaculty?.name || "",
       })
     ) || [];
 
-  const getUniqueValues = (key: keyof TStudentRow) =>
+  const getUniqueValues = (key: keyof TFacultyRow) =>
     Array.from(new Set(tableData.map((item) => item[key])))
       .filter((v): v is string => v !== undefined)
       .map((value) => ({
@@ -77,12 +71,12 @@ const StudentIntro = () => {
         value,
       }));
 
-  const handleOpen = (record: TStudentRow) => {
-    setStudent(record);
+  const handleOpen = (record: TFacultyRow) => {
+    setFaculty(record);
     setOpen(true);
   };
 
-  const columns: TableColumnsType<TStudentRow> = [
+  const columns: TableColumnsType<TFacultyRow> = [
     {
       title: "Name",
       dataIndex: "name",
@@ -90,26 +84,24 @@ const StudentIntro = () => {
       onFilter: (value, record) => record.name === value,
     },
     {
-      title: "Roll Number",
-      dataIndex: "id",
-      filters: getUniqueValues("id"),
-      onFilter: (value, record) => record.id === value,
+      title: "Designation",
+      dataIndex: "designation",
+      filters: getUniqueValues("designation"),
+      onFilter: (value, record) => record.designation === value,
     },
     {
-      title: "Admission Semester",
-      dataIndex: "admissionSemester",
-      filters: getUniqueValues("admissionSemester"),
-      onFilter: (value, record) => record.admissionSemester === value,
+      title: "Academic Department",
+      dataIndex: "academicDepartment",
+      filters: getUniqueValues("academicDepartment"),
+      onFilter: (value, record) => record.academicDepartment === value,
     },
     {
       title: "Profile Image",
       dataIndex: "profileImage",
-      render: (url) =>
-        url ? <img src={url} alt="Img" width={50} height={50} /> : "N/A",
+      render: (url) => (url ? <img src={url} alt="Img" width={50} /> : "N/A"),
     },
     {
       title: "Action",
-      dataIndex: "endMonth",
       render: (_, record) => {
         console.log({ record });
         return (
@@ -123,7 +115,7 @@ const StudentIntro = () => {
     },
   ];
 
-  const onChange: TableProps<TStudentRow>["onChange"] = (
+  const onChange: TableProps<TFacultyRow>["onChange"] = (
     pagination,
     filters,
     sorter,
@@ -146,7 +138,7 @@ const StudentIntro = () => {
   return (
     <>
       <div className="text-2xl font-bold text-center">Student Intro</div>
-      <Table<TStudentRow>
+      <Table<TFacultyRow>
         rowKey="_id"
         loading={isFetching}
         columns={columns}
@@ -162,13 +154,13 @@ const StudentIntro = () => {
         current={page}
         onChange={(value) => setPage(value)}
       />
-      <StudentIntroModal
+      <FacultyIntroModal
         open={open}
         onClose={() => setOpen(false)}
-        student={student}
+        faculty={faculty}
       />
     </>
   );
 };
 
-export default StudentIntro;
+export default FacultyIntro;
