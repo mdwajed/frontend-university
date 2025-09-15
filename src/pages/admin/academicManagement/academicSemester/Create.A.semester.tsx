@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
@@ -48,7 +48,7 @@ const CreateSemester = () => {
       toast.error("Error occured in generating semester data");
     }
   };
-  // (res.error as APIError)?.data as APIError;
+
   const defaultValues = {
     name: "01",
     academicYear: String(currentYear),
@@ -57,53 +57,65 @@ const CreateSemester = () => {
   };
 
   return (
-    <Row justify="center" align="middle">
-      <Col span={12}>
-        <UniversityForm<FieldValues>
-          onSubmit={onSubmit}
-          defaultValues={defaultValues}
-        >
-          <Row gutter={16}>
-            <Col span={12}>
-              <UniversitySelect<FieldValues>
-                label="Semester Name"
-                name="name"
-                options={nameOptions}
-                rules={{ required: "Semester name is required" }}
-              />
-            </Col>
-            <Col span={12}>
-              <UniversitySelect<FieldValues>
-                label="Academic Year"
-                name="academicYear"
-                options={yearOptions}
-                rules={{ required: "Academic year is required" }}
-              />
-            </Col>
-          </Row>
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
+      <Row justify="center">
+        <Col xs={24}>
+          <div className="text-2xl font-bold text-center">
+            Academic Semester Form
+          </div>
+        </Col>
+      </Row>
+      <Row justify="center" align="middle">
+        <Col span={24} sm={20} md={16}>
+          <UniversityForm<FieldValues>
+            onSubmit={onSubmit}
+            defaultValues={defaultValues}
+          >
+            <Row gutter={16}>
+              <Col xs={24} sm={20} md={12}>
+                <UniversitySelect<FieldValues>
+                  label="Semester Name"
+                  name="name"
+                  options={nameOptions}
+                  rules={{ required: "Semester name is required" }}
+                />
+              </Col>
+              <Col xs={24} sm={20} md={12}>
+                <UniversitySelect<FieldValues>
+                  label="Academic Year"
+                  name="academicYear"
+                  options={yearOptions}
+                  rules={{ required: "Academic year is required" }}
+                />
+              </Col>
+            </Row>
 
-          <Row gutter={16}>
-            <Col span={12}>
-              <UniversitySelect<FieldValues>
-                label="Start Month"
-                name="startMonth"
-                options={monthOptions}
-                rules={{ required: "Start month is required" }}
-              />
-            </Col>
-            <Col span={12}>
-              <EndMonthSelect />
-            </Col>
-          </Row>
+            <Row gutter={16}>
+              <Col xs={24} sm={20} md={12}>
+                <UniversitySelect<FieldValues>
+                  label="Start Month"
+                  name="startMonth"
+                  options={monthOptions}
+                  rules={{ required: "Start month is required" }}
+                />
+              </Col>
+              <Col xs={24} sm={20} md={12}>
+                <EndMonthSelect />
+              </Col>
+            </Row>
 
-          <Row justify="end" style={{ marginTop: 16 }}>
-            <Button htmlType="submit" size="large" type="primary">
-              Submit
-            </Button>
-          </Row>
-        </UniversityForm>
-      </Col>
-    </Row>
+            <Row
+              justify={{ xs: "center", md: "end" }}
+              style={{ marginTop: 16 }}
+            >
+              <Button htmlType="submit" size="large" type="primary">
+                Submit
+              </Button>
+            </Row>
+          </UniversityForm>
+        </Col>
+      </Row>
+    </Space>
   );
 };
 

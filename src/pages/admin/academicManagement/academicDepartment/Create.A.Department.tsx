@@ -1,4 +1,4 @@
-import { Button, Col, Row, Spin } from "antd";
+import { Button, Col, Row, Space, Spin } from "antd";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
@@ -52,37 +52,49 @@ const CreateDepartment = () => {
   };
 
   return (
-    <Row justify="center" align="middle">
-      <Col span={8}>
-        <UniversityForm<FieldValues>
-          onSubmit={onSubmit}
-          defaultValues={defaultValues}
-        >
-          <UniversityInput<FieldValues>
-            label="Academic Department Name"
-            name="name"
-            type="text"
-          />
-          <UniversitySelect<FieldValues>
-            label="Academic Faculty Name"
-            name="academicFaculty"
-            options={facultyOptions}
-            rules={{ required: "academicFaculty ID is required" }}
-            disabled={isSubmitting}
-          />
-          <Row justify="end" style={{ marginTop: 16 }}>
-            <Button
-              htmlType="submit"
-              size="large"
-              type="primary"
-              loading={isSubmitting}
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
+      <Row justify="center">
+        <Col xs={24}>
+          <div className="text-2xl font-bold text-center">
+            Academic Department Form
+          </div>
+        </Col>
+      </Row>
+      <Row justify="center" align="middle">
+        <Col xs={24} sm={16} md={12} xl={8}>
+          <UniversityForm<FieldValues>
+            onSubmit={onSubmit}
+            defaultValues={defaultValues}
+          >
+            <UniversityInput<FieldValues>
+              label="Academic Department Name"
+              name="name"
+              type="text"
+            />
+            <UniversitySelect<FieldValues>
+              label="Academic Faculty Name"
+              name="academicFaculty"
+              options={facultyOptions}
+              rules={{ required: "AcademicFaculty ID is Required" }}
+              disabled={isSubmitting}
+            />
+            <Row
+              justify={{ xs: "center", md: "end" }}
+              style={{ marginTop: 16 }}
             >
-              Submit
-            </Button>
-          </Row>
-        </UniversityForm>
-      </Col>
-    </Row>
+              <Button
+                htmlType="submit"
+                size="large"
+                type="primary"
+                loading={isSubmitting}
+              >
+                Submit
+              </Button>
+            </Row>
+          </UniversityForm>
+        </Col>
+      </Row>
+    </Space>
   );
 };
 

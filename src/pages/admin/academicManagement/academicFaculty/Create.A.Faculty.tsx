@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
@@ -28,24 +28,37 @@ const CreateSemester = () => {
   };
 
   return (
-    <Row justify="center" align="middle">
-      <Col span={8}>
-        <UniversityForm<FieldValues>
-          onSubmit={onSubmit}
-          defaultValues={defaultValues}
-        >
-          <UniversityInput<FieldValues>
-            label="Academic Faculty Name"
-            name="name"
-          />
-          <Row justify="end" style={{ marginTop: 16 }}>
-            <Button htmlType="submit" size="large" type="primary">
-              Submit
-            </Button>
-          </Row>
-        </UniversityForm>
-      </Col>
-    </Row>
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
+      <Row justify="center">
+        <Col xs={24}>
+          <div className="text-2xl font-bold text-center">
+            Academic Faculty Form
+          </div>
+        </Col>
+      </Row>
+
+      <Row justify="center">
+        <Col xs={24} sm={16} md={12} xl={8}>
+          <UniversityForm<FieldValues>
+            onSubmit={onSubmit}
+            defaultValues={defaultValues}
+          >
+            <UniversityInput<FieldValues>
+              label="Academic Faculty Name"
+              name="name"
+            />
+            <Row
+              justify={{ xs: "center", md: "end" }}
+              style={{ marginTop: 16 }}
+            >
+              <Button htmlType="submit" size="large" type="primary">
+                Submit
+              </Button>
+            </Row>
+          </UniversityForm>
+        </Col>
+      </Row>
+    </Space>
   );
 };
 

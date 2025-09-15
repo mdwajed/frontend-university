@@ -8,6 +8,10 @@ import type {
   TAcademicSemester,
   TAcademicSemesterResponse,
 } from "../../../pages/admin/academicManagement/academicSemester/academicSemester.constant";
+import type {
+  TRegisteredSemester,
+  TRegisteredSemesterResponse,
+} from "../../../pages/admin/courseManagement/semesterRegistration/semesterRegistration.type";
 import { baseApi } from "../../api/baseApi";
 
 const AcademicManagementApi = baseApi.injectEndpoints({
@@ -86,6 +90,51 @@ const AcademicManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllRegisteredSemester: builder.query<
+      TRegisteredSemesterResponse,
+      FilterArg | void
+    >({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((filter) => {
+            params.append(filter.name, filter.value);
+          });
+        }
+        return {
+          url: "/semester-registration",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["RegisteredSemester"],
+    }),
+
+    addRegisteredSemester: builder.mutation<
+      TRegisteredSemester,
+      Partial<TRegisteredSemester>
+    >({
+      query: (data) => ({
+        url: "/semester-registration/create-semester-registration",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    updateRegisteredSemesterStatus: builder.mutation<
+      TRegisteredSemester,
+      Partial<TRegisteredSemester>
+    >({
+      query: ({ _id, status }) => ({
+        url: `/semester-registration/${_id}`,
+        method: "PATCH",
+        body: { status },
+      }),
+
+      transformResponse: (response: { data: TRegisteredSemester }) => {
+        return response.data;
+      },
+      invalidatesTags: [{ type: "RegisteredSemester" }],
+    }),
   }),
 });
 
@@ -96,4 +145,7 @@ export const {
   useGetAllAcademicFacultyQuery,
   useGetAllAcademicDepartmentQuery,
   useAddAcademicDepartmentMutation,
+  useAddRegisteredSemesterMutation,
+  useGetAllRegisteredSemesterQuery,
+  useUpdateRegisteredSemesterStatusMutation,
 } = AcademicManagementApi;

@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.12",
     "antd": "^5.27.1",
+    "dayjs": "^1.11.18",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

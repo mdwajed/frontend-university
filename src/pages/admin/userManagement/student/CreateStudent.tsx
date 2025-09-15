@@ -1,4 +1,4 @@
-import { Button, Col, Divider, message, Row } from "antd";
+import { Button, Col, Divider, message, Row, Space } from "antd";
 import { useEffect } from "react";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import UniversityDatePicker from "../../../../components/form/UniversityDatePicker";
@@ -115,15 +115,21 @@ const CreateStudent = () => {
   };
 
   return (
-    <>
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
       {contextHolder}
-      <div className="text-2xl font-bold text-center">Student Intro Form</div>
+      {departmentError && (
+        <div style={{ color: "red" }}> Failed to load student.</div>
+      )}
       {semesterError && (
         <div style={{ color: "red" }}>Failed to load semesters.</div>
       )}
-      {departmentError && (
-        <div style={{ color: "red" }}> Failed to load departments.</div>
-      )}
+      <Row justify="center">
+        <Col xs={24}>
+          <div className="text-2xl font-bold text-center">
+            Student Intro Form
+          </div>
+        </Col>
+      </Row>
       <UniversityForm onSubmit={onSubmit} defaultValues={studentDefaultValue}>
         <Row justify="center" align="middle">
           <Col span={24} md={20} lg={16}>
@@ -132,26 +138,26 @@ const CreateStudent = () => {
               Personal Information
             </Divider>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="First Name"
                   name="student.name.firstName"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Last Name"
                   name="student.name.lastName"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Email"
                   name="student.email"
                   type="email"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Contact Number"
                   name="student.contactNo"
@@ -159,27 +165,27 @@ const CreateStudent = () => {
                 />
               </Col>
 
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityDatePicker<FieldValues>
                   label="Date of Birth"
                   name="student.dateOfBirth"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Emergency Contact Number"
                   name="student.emergencyContactNo"
                   type="tel"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversitySelect<FieldValues>
                   label="Gender"
                   name="student.gender"
                   options={GenderOptions}
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversitySelect<FieldValues>
                   label="Blood Group"
                   name="student.bloodGroup"
@@ -187,13 +193,13 @@ const CreateStudent = () => {
                 />
               </Col>
 
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Permanent Address"
                   name="student.permanentAddress"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Present Address"
                   name="student.presentAddress"
@@ -211,40 +217,40 @@ const CreateStudent = () => {
               Guardian Information
             </Divider>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Father's Name"
                   name="student.guardian.fatherName"
                 />
               </Col>
 
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Mother's Name"
                   name="student.guardian.motherName"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Father's Contact"
                   name="student.guardian.fatherContactNo"
                   type="tel"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Mother's Contact"
                   name="student.guardian.motherContactNo"
                   type="tel"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Father's Occupation"
                   name="student.guardian.fatherOccupation"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Mother's Occupation"
                   name="student.guardian.motherOccupation"
@@ -257,26 +263,26 @@ const CreateStudent = () => {
               Local Guardian
             </Divider>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Guardian Name"
                   name="student.localGuardian.name"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Guardian Contact"
                   name="student.localGuardian.contactNo"
                   type="tel"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Guardian Address"
                   name="student.localGuardian.address"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Guardian Occupation"
                   name="student.localGuardian.occupation"
@@ -288,7 +294,7 @@ const CreateStudent = () => {
               Academic Information
             </Divider>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversitySelect<FieldValues>
                   label="Admission Semester"
                   name="student.admissionSemester"
@@ -296,7 +302,7 @@ const CreateStudent = () => {
                   disabled={isSemesterFetching}
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversitySelect<FieldValues>
                   label="Academic Department"
                   name="student.academicDepartment"
@@ -306,7 +312,10 @@ const CreateStudent = () => {
               </Col>
             </Row>
             {/* Submit */}
-            <Row justify="center" style={{ marginTop: 24 }}>
+            <Row
+              justify={{ xs: "center", md: "end" }}
+              style={{ marginTop: 24 }}
+            >
               <Button
                 htmlType="submit"
                 size="large"
@@ -319,7 +328,7 @@ const CreateStudent = () => {
           </Col>
         </Row>
       </UniversityForm>
-    </>
+    </Space>
   );
 };
 

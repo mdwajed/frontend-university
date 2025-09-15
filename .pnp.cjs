@@ -38,6 +38,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:5.0.1"],\
           ["antd", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:5.27.1"],\
           ["autoprefixer", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:10.4.21"],\
+          ["dayjs", "npm:1.11.18"],\
           ["eslint", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:9.35.0"],\
           ["eslint-config-prettier", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:10.1.8"],\
           ["eslint-plugin-react", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:7.37.5"],\
@@ -3060,6 +3061,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../Users/Administrator/AppData/Local/Yarn/Berry/cache/dayjs-npm-1.11.13-d478bb9479-10c0.zip/node_modules/dayjs/",\
         "packageDependencies": [\
           ["dayjs", "npm:1.11.13"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:1.11.18", {\
+        "packageLocation": "../../../Users/Administrator/AppData/Local/Yarn/Berry/cache/dayjs-npm-1.11.18-76d3212973-10c0.zip/node_modules/dayjs/",\
+        "packageDependencies": [\
+          ["dayjs", "npm:1.11.18"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7520,6 +7528,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:5.0.1"],\
           ["antd", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:5.27.1"],\
           ["autoprefixer", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:10.4.21"],\
+          ["dayjs", "npm:1.11.18"],\
           ["eslint", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:9.35.0"],\
           ["eslint-config-prettier", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:10.1.8"],\
           ["eslint-plugin-react", "virtual:3f275fef0f47d0ea3609a76d51799b9955b9ad2f22c19e43dbebc347c7de6f2088cc7c3865303d4e08ee3a895d083cbfe353de3b8078e765ee304377c630eda8#npm:7.37.5"],\

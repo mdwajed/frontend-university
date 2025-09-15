@@ -1,4 +1,4 @@
-import { Button, Col, Divider, message, Row } from "antd";
+import { Button, Col, Divider, message, Row, Space } from "antd";
 import { useEffect } from "react";
 import { type FieldValues, type SubmitHandler } from "react-hook-form";
 import UniversityDatePicker from "../../../../components/form/UniversityDatePicker";
@@ -85,12 +85,18 @@ const CreateFaculty = () => {
     console.log([...formData.entries()]);
   };
   return (
-    <>
+    <Space direction="vertical" size="large" style={{ width: "100%" }}>
       {contextHolder}
-      <div className="text-2xl font-bold text-center">Faculty Intro Form</div>
       {departmentError && (
         <div style={{ color: "red" }}> Failed to load departments.</div>
       )}
+      <Row justify="center">
+        <Col xs={24}>
+          <div className="text-2xl font-bold text-center">
+            Faculty Intro Form
+          </div>
+        </Col>
+      </Row>
 
       <UniversityForm onSubmit={onSubmit}>
         <Row justify="center" align="middle">
@@ -100,32 +106,32 @@ const CreateFaculty = () => {
               Personal Information
             </Divider>
             <Row gutter={16}>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="First Name"
                   name="faculty.name.firstName"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Last Name"
                   name="faculty.name.lastName"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Designation"
                   name="faculty.designation"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Email"
                   name="faculty.email"
                   type="email"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Contact Number"
                   name="faculty.contactNo"
@@ -133,46 +139,46 @@ const CreateFaculty = () => {
                 />
               </Col>
 
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityDatePicker<FieldValues>
                   label="Date of Birth"
                   name="faculty.dateOfBirth"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Emergency Contact Number"
                   name="faculty.emergencyContactNo"
                   type="tel"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversitySelect<FieldValues>
                   label="Gender"
                   name="faculty.gender"
                   options={GenderOptions}
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversitySelect<FieldValues>
                   label="Blood Group"
                   name="faculty.bloodGroup"
                   options={BloodGroupOptions}
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Permanent Address"
                   name="faculty.permanentAddress"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <UniversityInput<FieldValues>
                   label="Present Address"
                   name="faculty.presentAddress"
                 />
               </Col>
-              <Col span={12}>
+              <Col xs={24} sm={12}>
                 <label htmlFor="profileImage">Profile Image</label>
                 <ProfileImageInput />
               </Col>
@@ -192,7 +198,10 @@ const CreateFaculty = () => {
               </Col>
             </Row>
             {/* Submit */}
-            <Row justify="center" style={{ marginTop: 24 }}>
+            <Row
+              justify={{ xs: "center", md: "end" }}
+              style={{ marginTop: 24 }}
+            >
               <Button
                 htmlType="submit"
                 size="large"
@@ -205,7 +214,7 @@ const CreateFaculty = () => {
           </Col>
         </Row>
       </UniversityForm>
-    </>
+    </Space>
   );
 };
 

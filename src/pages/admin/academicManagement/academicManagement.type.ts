@@ -12,7 +12,6 @@ export type APIError = {
     success?: string;
     errorMessages?: { path: string; message: string }[];
   };
-
   message?: string;
   success?: boolean;
 };

@@ -9,16 +9,13 @@ const EndMonthSelect = () => {
 
   useEffect(() => {
     const start = parseInt(startMonth);
-
     // const end = parseInt(getValues("endMonth"));
     if (Number.isNaN(start)) return;
-
     // Always set end month = start + 3 (wrap around if > 12)
     let newEnd = start + 3;
     if (newEnd > 12) {
       newEnd = newEnd % 12; // wrap around
     }
-
     setValue("endMonth", String(newEnd).padStart(2, "0"));
   }, [startMonth, setValue]);
 
