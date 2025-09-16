@@ -68,6 +68,7 @@ const CreateSemesterRegistration = () => {
                   name="academicSemester"
                   options={academicSemesterOptions}
                   rules={{ required: "Academic Semeste is required" }}
+                  multiple={false}
                 />
               </Col>
               <Col xs={24} sm={20} md={12}>
@@ -76,6 +77,7 @@ const CreateSemesterRegistration = () => {
                   name="status"
                   options={semesterStatusOptions}
                   rules={{ required: "Semester status is required" }}
+                  multiple={false}
                 />
               </Col>
             </Row>

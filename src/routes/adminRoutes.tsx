@@ -4,6 +4,8 @@ import AcademicFaculty from "../pages/admin/academicManagement/academicFaculty/A
 import CreateAcademicFaculty from "../pages/admin/academicManagement/academicFaculty/Create.A.Faculty";
 import AcademicSemester from "../pages/admin/academicManagement/academicSemester/AcademicSemester";
 import CreateSemester from "../pages/admin/academicManagement/academicSemester/Create.A.semester";
+import CourseIntro from "../pages/admin/courseManagement/course/CourseIntro";
+import CourseIntroModal from "../pages/admin/courseManagement/course/CourseModal";
 import Courses from "../pages/admin/courseManagement/course/Courses";
 import CreateCourse from "../pages/admin/courseManagement/course/CreateCourse";
 import CreateOfferedCourse from "../pages/admin/courseManagement/offeredCourse/CreateOfferedCourse";
@@ -145,6 +147,22 @@ export const adminPaths = [
         name: " Offered Courses",
         path: "offered-courses",
         element: <OfferedCourses />,
+      },
+      {
+        name: "Course Intro",
+        path: "course-intro",
+        element: <CourseIntro />,
+      },
+      {
+        path: "course-intro/:courseId",
+        element: (
+          <CourseIntroModal
+            open={false}
+            onClose={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        ),
       },
     ],
   },

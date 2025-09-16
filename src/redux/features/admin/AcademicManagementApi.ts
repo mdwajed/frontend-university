@@ -9,6 +9,10 @@ import type {
   TAcademicSemesterResponse,
 } from "../../../pages/admin/academicManagement/academicSemester/academicSemester.constant";
 import type {
+  ICourse,
+  IPagination,
+} from "../../../pages/admin/courseManagement/course/course.type";
+import type {
   TRegisteredSemester,
   TRegisteredSemesterResponse,
 } from "../../../pages/admin/courseManagement/semesterRegistration/semesterRegistration.type";
@@ -133,7 +137,32 @@ const AcademicManagementApi = baseApi.injectEndpoints({
       transformResponse: (response: { data: TRegisteredSemester }) => {
         return response.data;
       },
-      invalidatesTags: [{ type: "RegisteredSemester" }],
+      invalidatesTags: ["RegisteredSemester"],
+    }),
+
+    addCourse: builder.mutation<ICourse, Partial<ICourse>>({
+      query: (data) => ({
+        url: "/courses/create-course",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["course"],
+    }),
+    getAllCourses: builder.query<IPagination<ICourse>, FilterArg | void>({
+      query: (args) => {
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((filter) => {
+            params.append(filter.name, filter.value);
+          });
+        }
+        return {
+          url: "/courses",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["course"],
     }),
   }),
 });
@@ -148,4 +177,6 @@ export const {
   useAddRegisteredSemesterMutation,
   useGetAllRegisteredSemesterQuery,
   useUpdateRegisteredSemesterStatusMutation,
+  useAddCourseMutation,
+  useGetAllCoursesQuery,
 } = AcademicManagementApi;
