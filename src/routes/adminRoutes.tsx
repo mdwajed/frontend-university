@@ -5,7 +5,6 @@ import CreateAcademicFaculty from "../pages/admin/academicManagement/academicFac
 import AcademicSemester from "../pages/admin/academicManagement/academicSemester/AcademicSemester";
 import CreateSemester from "../pages/admin/academicManagement/academicSemester/Create.A.semester";
 import CourseIntro from "../pages/admin/courseManagement/course/CourseIntro";
-import CourseIntroModal from "../pages/admin/courseManagement/course/CourseModal";
 import Courses from "../pages/admin/courseManagement/course/Courses";
 import CreateCourse from "../pages/admin/courseManagement/course/CreateCourse";
 import CreateOfferedCourse from "../pages/admin/courseManagement/offeredCourse/CreateOfferedCourse";
@@ -16,10 +15,8 @@ import AdminDashboard from "../pages/admin/userManagement/AdminDashboard";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
 import CreateFaculty from "../pages/admin/userManagement/faculty/CreateFaculty";
 import FacultyIntro from "../pages/admin/userManagement/faculty/FacultyIntro";
-import FacultyIntroModal from "../pages/admin/userManagement/faculty/FacultyIntroModel";
 import CreateStudent from "../pages/admin/userManagement/student/CreateStudent";
 import StudentIntro from "../pages/admin/userManagement/student/StudentIntro";
-import StudentIntroModal from "../pages/admin/userManagement/student/StudentIntroModal";
 
 export const adminPaths = [
   {
@@ -91,28 +88,6 @@ export const adminPaths = [
         path: "faculty-intro",
         element: <FacultyIntro />,
       },
-      {
-        path: "student-intro/:studentId",
-        element: (
-          <StudentIntroModal
-            open={false}
-            onClose={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        ),
-      },
-      {
-        path: "faculty-intro/:facultyId",
-        element: (
-          <FacultyIntroModal
-            open={false}
-            onClose={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        ),
-      },
     ],
   },
   {
@@ -152,17 +127,6 @@ export const adminPaths = [
         name: "Course Intro",
         path: "course-intro",
         element: <CourseIntro />,
-      },
-      {
-        path: "course-intro/:courseId",
-        element: (
-          <CourseIntroModal
-            open={false}
-            onClose={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
-        ),
       },
     ],
   },

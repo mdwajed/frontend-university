@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { useGetAllCoursesQuery } from "../../../../redux/features/admin/AcademicManagementApi";
 import type { TQueryParam } from "../../academicManagement/academicManagement.type";
+import AddCourse from "./AddFacultyModal";
 import type { ICourse } from "./course.type";
 import CourseIntroModal from "./CourseModal";
 
@@ -15,9 +16,13 @@ const CourseIntro = () => {
   const [page, setPage] = useState<number>(1);
   const [params, setParams] = useState<TQueryParam[]>([]);
 
-  // modal state
-  const [open, setOpen] = useState(false);
+  //course modal state
+  const [openDetails, setOpenDetails] = useState(false);
   const [course, setCourse] = useState<ICourse>();
+
+  //course modal state
+  const [openAddFaculty, setOpenAddFaculty] = useState(false);
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
 
   const { data: courseData, isFetching } = useGetAllCoursesQuery([
     { name: "limit", value: "5" },
@@ -46,9 +51,13 @@ const CourseIntro = () => {
         value,
       }));
 
-  const handleOpen = (record: ICourse) => {
+  const handleDetailsOpen = (record: ICourse) => {
     setCourse(record);
-    setOpen(true);
+    setOpenDetails(true);
+  };
+  const handleAddFacultyOpen = (record: ICourse) => {
+    setSelectedCourseId(record._id);
+    setOpenAddFaculty(true);
   };
 
   const columns: TableColumnsType<ICourse> = [
@@ -82,9 +91,12 @@ const CourseIntro = () => {
         console.log({ record });
         return (
           <div>
-            <Button onClick={() => handleOpen(record)}>Details</Button>
-            {/* <Button className="">Update</Button>
-            <Button className="">Delete</Button> */}
+            <Button onClick={() => handleDetailsOpen(record)}>Details</Button>
+            <Button onClick={() => handleAddFacultyOpen(record)}>
+              Add Faculty
+            </Button>
+
+            {/* <Button className="">Delete</Button>  */}
           </div>
         );
       },
@@ -131,9 +143,14 @@ const CourseIntro = () => {
         onChange={(value) => setPage(value)}
       />
       <CourseIntroModal
-        open={open}
-        onClose={() => setOpen(false)}
+        open={openDetails}
+        onClose={() => setOpenDetails(false)}
         course={course}
+      />
+      <AddCourse
+        open={openAddFaculty}
+        onClose={() => setOpenAddFaculty(false)}
+        courseId={selectedCourseId}
       />
     </>
   );

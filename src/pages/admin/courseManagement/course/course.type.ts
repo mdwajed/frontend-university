@@ -21,3 +21,11 @@ export interface IPagination<T> {
   };
   data: T[];
 }
+
+export interface TCourseModelProps {
+  open: boolean;
+  onClose: () => void;
+  course?: ICourse;
+  courseId?: string | null;
+  faculty?: string | null;
+}

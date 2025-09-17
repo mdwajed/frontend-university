@@ -1,16 +1,10 @@
 import { Button, Modal } from "antd";
-import type { ICourse } from "./course.type";
-
-type TCourseModelProps = {
-  open: boolean;
-  onClose: () => void;
-  course?: ICourse;
-};
+import type { TCourseModelProps } from "./course.type";
 
 const CourseIntroModal = ({ course, open, onClose }: TCourseModelProps) => {
   return (
     <Modal
-      title="Student Modal"
+      title="Course Modal"
       open={open}
       onCancel={onClose}
       footer={[
