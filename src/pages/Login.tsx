@@ -2,8 +2,8 @@ import { Button, Row } from "antd";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
-import UniversityForm from "../components/form/UNiversityForm";
-import UniversityInput from "../components/form/UNiversityInput";
+import UniversityForm from "../components/form/UniversityForm";
+import UniversityInput from "../components/form/UniversityInput";
 import { useLoginMutation } from "../redux/api/authApi";
 import { setUser, type TUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks";
@@ -23,11 +23,16 @@ const Login = () => {
         password: data.password,
       };
       const res = await login(userInfo).unwrap();
+      console.log({ res });
       const user = verifyToken(res.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.accessToken }));
-      console.log("Toast fired!");
+      console.log("Toast fired!", { data });
       toast.success("Login successfull", { id: toastId, duration: 2000 });
-      navigate(`/${user.role}/dashboard`);
+      if (res.data.needPasswordChange) {
+        navigate(`/change-password`);
+      } else {
+        navigate(`/${user.role}/dashboard`);
+      }
     } catch (error) {
       toast.error("Something went wrong", { id: toastId, duration: 2000 });
     }
@@ -38,8 +43,8 @@ const Login = () => {
       <UniversityForm
         onSubmit={onSubmit}
         defaultValues={{
-          id: "A-0001",
-          password: "admin123",
+          id: "2025020006",
+          password: "student12345",
         }}
       >
         <UniversityInput type="text" name="id" label="User ID" />
