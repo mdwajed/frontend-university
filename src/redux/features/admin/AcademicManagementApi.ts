@@ -2,13 +2,19 @@ import type {
   TAcademicDepaetment,
   TAcademicDepartmentResponse,
 } from "../../../pages/admin/academicManagement/academicDepartment/AcademicDepartment.type";
-import type { TAcademicFaculty } from "../../../pages/admin/academicManagement/academicFaculty/academicFaculty.type";
+import type {
+  TAcademicFaculty,
+  TAcademicFacultyResponse,
+} from "../../../pages/admin/academicManagement/academicFaculty/academicFaculty.type";
+import type { IOfferedCourse } from "./../../../pages/admin/courseManagement/offeredCourse/offeredCourse.type";
+
 import type { FilterArg } from "../../../pages/admin/academicManagement/academicManagement.type";
 import type {
   TAcademicSemester,
   TAcademicSemesterResponse,
 } from "../../../pages/admin/academicManagement/academicSemester/academicSemester.constant";
 import type {
+  IAssignFaculties,
   ICourse,
   IPagination,
 } from "../../../pages/admin/courseManagement/course/course.type";
@@ -59,7 +65,10 @@ const AcademicManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
-    getAllAcademicFaculty: builder.query({
+    getAllAcademicFaculty: builder.query<
+      TAcademicFacultyResponse,
+      FilterArg | void
+    >({
       query: (body) => ({
         url: "/academic-faculties",
         method: "GET",
@@ -164,7 +173,7 @@ const AcademicManagementApi = baseApi.injectEndpoints({
       },
       providesTags: ["course"],
     }),
-    assignFacultyToCourse: builder.mutation<
+    assignFacultiesToCourse: builder.mutation<
       ICourse,
       { courseId: string; faculties: string[] }
     >({
@@ -175,6 +184,26 @@ const AcademicManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["course"],
     }),
+    getAllAssignedFacultiesToCourse: builder.query({
+      query: (id: string) => ({
+        url: `/courses/${id}/get-faculties`,
+        method: "GET",
+      }),
+      transformResponse: (response: { data: IAssignFaculties }) => {
+        return response.data.faculties;
+      },
+      providesTags: ["course"],
+    }),
+    addOfferedCourse: builder.mutation<IOfferedCourse, Partial<IOfferedCourse>>(
+      {
+        query: (data) => ({
+          url: `offered-courses/create-offered-course`,
+          method: "POST",
+          body: data,
+        }),
+        invalidatesTags: ["course"],
+      }
+    ),
   }),
 });
 
@@ -190,5 +219,7 @@ export const {
   useUpdateRegisteredSemesterStatusMutation,
   useAddCourseMutation,
   useGetAllCoursesQuery,
-  useAssignFacultyToCourseMutation,
+  useAssignFacultiesToCourseMutation,
+  useGetAllAssignedFacultiesToCourseQuery,
+  useAddOfferedCourseMutation,
 } = AcademicManagementApi;

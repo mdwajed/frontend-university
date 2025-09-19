@@ -128,6 +128,11 @@ export const adminPaths = [
         path: "course-intro",
         element: <CourseIntro />,
       },
+      {
+        name: "Offered Course",
+        path: "offered-course",
+        element: <CreateOfferedCourse />,
+      },
     ],
   },
 ];

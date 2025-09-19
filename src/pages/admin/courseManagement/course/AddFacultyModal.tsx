@@ -2,7 +2,7 @@ import { Button, Modal } from "antd";
 import { toast } from "sonner";
 import UniversityForm from "../../../../components/form/UniversityForm";
 import UniversitySelect from "../../../../components/form/UniversitySelect";
-import { useAssignFacultyToCourseMutation } from "../../../../redux/features/admin/AcademicManagementApi";
+import { useAssignFacultiesToCourseMutation } from "../../../../redux/features/admin/AcademicManagementApi";
 import { useGetAllFacultyQuery } from "../../../../redux/features/admin/userManagementApi";
 import type { TCourseModelProps } from "./course.type";
 
@@ -11,8 +11,8 @@ const AddFacultyModal = ({ courseId, open, onClose }: TCourseModelProps) => {
   const { data: facultyData, isFetching } = useGetAllFacultyQuery([
     { name: "limit", value: "5" },
   ]);
-  const [assignFacultyToCourse, { isLoading }] =
-    useAssignFacultyToCourseMutation();
+  const [assignFacultiesToCourse, { isLoading }] =
+    useAssignFacultiesToCourseMutation();
   const facultyOptions =
     facultyData?.data.map((item) => ({
       value: item._id,
@@ -20,16 +20,16 @@ const AddFacultyModal = ({ courseId, open, onClose }: TCourseModelProps) => {
         .filter(Boolean)
         .join(" "),
     })) || [];
-  const onsubmit = async (data: { faculty: string[] }) => {
-    console.log([data.faculty]);
+  const onsubmit = async (data: { faculties: string[] }) => {
+    console.log(data.faculties);
     if (!courseId) {
       console.error("No courseId provided to AddFacultyModal");
       return;
     }
     try {
-      await assignFacultyToCourse({
+      await assignFacultiesToCourse({
         courseId,
-        faculties: data.faculty,
+        faculties: data.faculties,
       }).unwrap();
       toast.success("Faculty added to course Successfully");
       onClose();
@@ -48,7 +48,7 @@ const AddFacultyModal = ({ courseId, open, onClose }: TCourseModelProps) => {
       >
         <UniversityForm onSubmit={onsubmit}>
           <UniversitySelect
-            name="faculty"
+            name="faculties"
             label="Faculty Name"
             options={facultyOptions}
             disabled={isLoading}
